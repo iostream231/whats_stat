@@ -13,6 +13,6 @@ Just clone the repository and then compile `what_stat.c` using gcc
   -u { int }	Set a maximum user limit. Default: 256 <br />
   -i {float}	Set Interval between two conversations in hours. Default: 1.0h
 
-##Options
+## Options
   -e {char}	Search For a specific word <br />
   -g {none}	Show global results too (if combined with `-e`)
