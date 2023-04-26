@@ -89,10 +89,9 @@ struct flags * parse_flags(int argc, char ** argv) {
         }
     }
     if(sys_flags->filename == NULL) {
-        // free(sys_flags);
-        // puts(usage_str);
-        // exit(EXIT_FAILURE);
-        sys_flags->filename = "some_chat.txt";
+        free(sys_flags);
+        puts(usage_str);
+        exit(EXIT_FAILURE);
     }
     
     if(sys_flags->spec_word != NULL && e_or_g_before == 1)

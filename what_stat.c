@@ -11,7 +11,6 @@ static const char *const block_uni = "█";
 int draw_histogram(struct user * users, size_t len, enum metric mtc) {
     // Init Variables 
     float user_perc = .0f, init_perc = user_perc;
-    size_t len_s = 0;
 
 
     for(size_t i = 0; i < len; ++i) {
@@ -148,6 +147,16 @@ int main(int argc, char ** argv) {
                      most_active, total_users[i].active_hours[most_active], ((float) active_hours[most_active] / (float) total_users[i].mesages_sent) * 100.0f);
 
         }
+
+        puts("========== Most Used Word ==========");
+        struct word_t * muw = get_muw(); // Get Most used word.
+        if( NULL == muw ) {
+            fprintf(stderr, "Error : Getting Most Used Word \n");
+            return -2;
+        }
+        printf("\tMost Used Word : %s\n\tUsed : %lu (%.4f%%)\n", muw->word, muw->count, ((float) muw->count / (float) get_words()) * 100.0f);
+
+        
 
         
     }

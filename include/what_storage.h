@@ -7,6 +7,7 @@
 static struct user * users; 
 static struct word_t * words;
 static int max_users = 0;
+static struct word_t * most_used = NULL;
 
 // Keeping Pointers To be freed 
 struct flags * ctn_flags;
@@ -71,14 +72,23 @@ static struct word_t * append_word_storage(struct word_t * word_t, char * word, 
             word_t->count = 1;
             word_t->left = word_t->right = NULL;
         }
+        if(most_used == NULL)
+            most_used = word_t;
     } else if (strcmp(word_t->word, word) > 0)  // Word is at right branch of the tree 
         word_t->right = append_word_storage(word_t->right, word,  len);
     else if(strcmp(word_t->word, word) < 0) // Word is at left branch of the tree 
         word_t->left = append_word_storage(word_t->left, word, len);
-    else 
+    else { 
         word_t->count++; // Word Already Exists 
-
+        if(word_t->count > most_used->count)
+            most_used = word_t;
+    }
     return word_t; // Returns word 
+}
+
+// Get Most Used Word 
+struct word_t * get_muw(void) {
+    return most_used;
 }
 
 // Append Word To Storage (an simplified version of the function above)
